@@ -48,6 +48,10 @@ namespace TriangleAreaTest
             Assert.AreEqual(TriangleHelper.Area(30, 40, 50), 600);
             Assert.AreEqual(TriangleHelper.Area(12, 13, 5), 30);
 
+            Assert.AreEqual(TriangleHelper.Area(4, 4, 5.60), 8);
+
+            Assert.AreEqual(TriangleHelper.Area(12, 13, 5), 30);
+
             Assert.AreEqual(TriangleHelper.Area(9, 12, 15), 54);
             Assert.AreEqual(TriangleHelper.Area(39, 80, 89), 1560);
             Assert.AreEqual(TriangleHelper.Area(68, 285, 293), 9690);
@@ -60,6 +64,20 @@ namespace TriangleAreaTest
             Assert.AreEqual(TriangleHelper.Area(3, 5, 4), 6);
             Assert.AreEqual(TriangleHelper.Area(4, 5, 3), 6);
             Assert.AreEqual(TriangleHelper.Area(4, 3, 5), 6);
+        }
+
+        [TestMethod]
+        public void IsAccuracyCorrect()//Тестирование точности
+        {
+            Assert.AreEqual(TriangleHelper.AreaWithAccuracy(4, 4, 5.60), 8);
+            Assert.ThrowsException<RightTriangleException>(() => TriangleHelper.AreaWithAccuracy(4, 4, 5.60, 3));
+
+            Assert.AreEqual(TriangleHelper.AreaWithAccuracy(41, 41, 57.98), 840.5);
+            Assert.AreEqual(TriangleHelper.AreaWithAccuracy(41, 41, 58, 1), 840.5);
+            Assert.AreEqual(TriangleHelper.AreaWithAccuracy(41, 41, 57.982757057296896, 3), 840.5);//Настоящая гипотенуза примерна равна 57.982756057296896
+            Assert.ThrowsException<RightTriangleException>(() => TriangleHelper.AreaWithAccuracy(41, 41, 57.982757057296896));
+
+            Assert.AreEqual(TriangleHelper.AreaWithAccuracy(3151.21, 28, 3151.334394205096), 44116.94);
         }
     }
 }
